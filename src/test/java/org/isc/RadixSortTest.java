@@ -29,7 +29,7 @@ public class RadixSortTest {
                 BigInteger.valueOf(802)
         };
 
-        RadixSort.radixSort(input); // No necesitas el número máximo de dígitos aquí
+        RadixSort.radixSort(input); //
         assertArrayEquals(expected, input);
     }
 
@@ -188,7 +188,7 @@ public class RadixSortTest {
         // Ejecutar el ordenamiento en un solo hilo
         for (BigInteger[] array : arraysToSort) {
             RadixSort.radixSort(array);
-            // Aquí puedes agregar cualquier otra verificación si es necesario, pero no usaremos isSorted.
+
         }
     }
 
@@ -208,7 +208,6 @@ public class RadixSortTest {
         // Llamar al algoritmo Radix Sort
         RadixSort.radixSort(input);
 
-        // No hay verificación de orden aquí
     }
 
 
