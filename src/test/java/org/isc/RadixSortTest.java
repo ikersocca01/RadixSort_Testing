@@ -7,33 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RadixSortTest {
 
     @Test
-    public void testRadixSort004_NormalArray() {
-        BigInteger[] input = {
-                BigInteger.valueOf(170),
-                BigInteger.valueOf(45),
-                BigInteger.valueOf(75),
-                BigInteger.valueOf(90),
-                BigInteger.valueOf(802),
-                BigInteger.valueOf(24),
-                BigInteger.valueOf(2),
-                BigInteger.valueOf(66)
-        };
-        BigInteger[] expected = {
-                BigInteger.valueOf(2),
-                BigInteger.valueOf(24),
-                BigInteger.valueOf(45),
-                BigInteger.valueOf(66),
-                BigInteger.valueOf(75),
-                BigInteger.valueOf(90),
-                BigInteger.valueOf(170),
-                BigInteger.valueOf(802)
-        };
-
-        RadixSort.radixSort(input); //
-        assertArrayEquals(expected, input);
-    }
-
-    @Test
     public void testRadixSort001_ValidArray() {
         // Caso de prueba 1: Array con números aleatorios
         BigInteger[] input = {
@@ -62,28 +35,8 @@ public class RadixSortTest {
     }
 
     @Test
-    public void testRadixSort006_SingleElementArray() {
-        // Caso de prueba 2: Array con un solo elemento
-        BigInteger[] input = {BigInteger.valueOf(42)};
-        BigInteger[] expected = {BigInteger.valueOf(42)};
-
-        RadixSort.radixSort(input);
-        assertArrayEquals(expected, input);
-    }
-
-    @Test
-    public void testRadixSort005_EmptyArray() {
-        // Caso de prueba 3: Array vacío
-        BigInteger[] input = {};
-        BigInteger[] expected = {};
-
-        RadixSort.radixSort(input);
-        assertArrayEquals(expected, input);
-    }
-
-    @Test
     public void testRadixSort002_ArrayWith_Duplicates() {
-        // Caso de prueba 4: Array con elementos duplicados
+        //Caso de prueba 2: Array con duplicados
         BigInteger[] input = {
                 BigInteger.valueOf(5),
                 BigInteger.valueOf(3),
@@ -106,21 +59,71 @@ public class RadixSortTest {
     }
 
     @Test
-    public void testRadixSort011_LargeNumbers_Digits_6() {
+    public void testRadixSort003_AlreadySorted() {
+        //Caso de prueba 3: Array ordenado
+        BigInteger[] sortedArray = {
+                BigInteger.valueOf(2),
+                BigInteger.valueOf(24),
+                BigInteger.valueOf(45),
+                BigInteger.valueOf(66),
+                BigInteger.valueOf(75),
+                BigInteger.valueOf(90),
+                new BigInteger("17000000000000")
+        };
+        RadixSort.radixSort(sortedArray);
+        assertArrayEquals(new BigInteger[]{
+                BigInteger.valueOf(2),
+                BigInteger.valueOf(24),
+                BigInteger.valueOf(45),
+                BigInteger.valueOf(66),
+                BigInteger.valueOf(75),
+                BigInteger.valueOf(90),
+                new BigInteger("17000000000000")
+        }, sortedArray);  // El array debe mantenerse igual
+    }
+
+    @Test
+    public void testRadixSort004_NormalArray() {
+        //Caso de prueba 4: Array normal numeros enteros 3 digitos
         BigInteger[] input = {
-                BigInteger.valueOf(10000),
-                BigInteger.valueOf(100000),
-                BigInteger.valueOf(100),
-                BigInteger.valueOf(1000),
-                BigInteger.valueOf(10)
+                BigInteger.valueOf(170),
+                BigInteger.valueOf(45),
+                BigInteger.valueOf(75),
+                BigInteger.valueOf(90),
+                BigInteger.valueOf(802),
+                BigInteger.valueOf(24),
+                BigInteger.valueOf(2),
+                BigInteger.valueOf(66)
         };
         BigInteger[] expected = {
-                BigInteger.valueOf(10),
-                BigInteger.valueOf(100),
-                BigInteger.valueOf(1000),
-                BigInteger.valueOf(10000),
-                BigInteger.valueOf(100000)
+                BigInteger.valueOf(2),
+                BigInteger.valueOf(24),
+                BigInteger.valueOf(45),
+                BigInteger.valueOf(66),
+                BigInteger.valueOf(75),
+                BigInteger.valueOf(90),
+                BigInteger.valueOf(170),
+                BigInteger.valueOf(802)
         };
+
+        RadixSort.radixSort(input); //
+        assertArrayEquals(expected, input);
+    }
+    @Test
+    public void testRadixSort005_EmptyArray() {
+        // Caso de prueba 5: Array vacío
+        BigInteger[] input = {};
+        BigInteger[] expected = {};
+
+        RadixSort.radixSort(input);
+        assertArrayEquals(expected, input);
+    }
+
+    @Test
+    public void testRadixSort006_SingleElementArray() {
+        // Caso de prueba 6: Array con un solo elemento
+        BigInteger[] input = {BigInteger.valueOf(42)};
+        BigInteger[] expected = {BigInteger.valueOf(42)};
 
         RadixSort.radixSort(input);
         assertArrayEquals(expected, input);
@@ -128,7 +131,8 @@ public class RadixSortTest {
 
     @Test
     public void testRadixSort007_LargeNumbers_With_100Digits() {
-        // Array de BigInteger que representan números de 100 dígitos
+        //Caso de prueba 7: Números enteros grandes
+        // Array de BigInteger que representan números de 100 digitos
         BigInteger[] input = {
                 new BigInteger("43729847109283746512983745091827346510982374650192837465019283746501298374650918237465091823746509823745091827346509182734"),
                 new BigInteger("98374560192837465109283745019283746501298374560918237465091827346509182734509821734650918237465012983745091827346510982374"),
@@ -148,6 +152,24 @@ public class RadixSortTest {
 
         RadixSort.radixSort(input);
         assertArrayEquals(expected, input);
+    }
+
+    @Test
+    public void testRadixSort008_Threads() {
+        //Caso de prueba 8: Ejecuciones simultaneas
+        // Arreglos predefinidos
+        BigInteger[][] arraysToSort = {
+                {BigInteger.valueOf(170), BigInteger.valueOf(45), BigInteger.valueOf(75)},
+                {BigInteger.valueOf(90), BigInteger.valueOf(802), BigInteger.valueOf(24)},
+                {BigInteger.valueOf(2), BigInteger.valueOf(66), BigInteger.valueOf(150)},
+                {BigInteger.valueOf(1000), BigInteger.valueOf(500), BigInteger.valueOf(250)}
+        };
+
+        // Ejecutar el ordenamiento en un solo hilo
+        for (BigInteger[] array : arraysToSort) {
+            RadixSort.radixSort(array);
+
+        }
     }
 
     @Test
@@ -176,24 +198,8 @@ public class RadixSortTest {
     }
 
     @Test
-    public void testRadixSort008_Threads() {
-        // Arreglos predefinidos
-        BigInteger[][] arraysToSort = {
-                {BigInteger.valueOf(170), BigInteger.valueOf(45), BigInteger.valueOf(75)},
-                {BigInteger.valueOf(90), BigInteger.valueOf(802), BigInteger.valueOf(24)},
-                {BigInteger.valueOf(2), BigInteger.valueOf(66), BigInteger.valueOf(150)},
-                {BigInteger.valueOf(1000), BigInteger.valueOf(500), BigInteger.valueOf(250)}
-        };
-
-        // Ejecutar el ordenamiento en un solo hilo
-        for (BigInteger[] array : arraysToSort) {
-            RadixSort.radixSort(array);
-
-        }
-    }
-
-    @Test
     public void testRadixSort010_Sort1000Numbers_with_5digits() {
+        //Caso de prueba 10: Array de 1000 elementos con 5 digitos
         // Generar un arreglo de 1000 BigIntegers aleatorios de 5 dígitos
         int size = 1000;
         BigInteger[] input = new BigInteger[size];
@@ -210,6 +216,27 @@ public class RadixSortTest {
 
     }
 
+    @Test
+    public void testRadixSort011_LargeNumbers_Digits_6() {
+        //Caso de prueba 11: array con elementos con 6 digitos
+        BigInteger[] input = {
+                BigInteger.valueOf(10000),
+                BigInteger.valueOf(100000),
+                BigInteger.valueOf(100),
+                BigInteger.valueOf(1000),
+                BigInteger.valueOf(10)
+        };
+        BigInteger[] expected = {
+                BigInteger.valueOf(10),
+                BigInteger.valueOf(100),
+                BigInteger.valueOf(1000),
+                BigInteger.valueOf(10000),
+                BigInteger.valueOf(100000)
+        };
+
+        RadixSort.radixSort(input);
+        assertArrayEquals(expected, input);
+    }
 
 
     @Test
