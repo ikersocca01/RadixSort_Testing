@@ -75,14 +75,23 @@ public class RadixSort {
     public static void main(String[] args) {
         // Ejemplo de uso
         BigInteger[] A = {
+                new BigInteger("2"),
+                new BigInteger("3"),
+                new BigInteger("4"),
+                new BigInteger("5"),
+                new BigInteger("6"),
+                new BigInteger("7"),
+                new BigInteger("8"),
+                new BigInteger("9"),
                 new BigInteger("17000000000000"),
                 new BigInteger("45"),
                 new BigInteger("75"),
-                new BigInteger("90"),
                 new BigInteger("802"),
-                new BigInteger("24"),
+                new BigInteger("802"),
+                new BigInteger("0"),
+                new BigInteger("0"),
                 new BigInteger("2"),
-                new BigInteger("66")
+                new BigInteger("2")
         };
 
         System.out.println("Array Desordenado: " + Arrays.toString(A));
